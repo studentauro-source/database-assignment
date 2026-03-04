@@ -65,3 +65,55 @@ INSERT INTO employees (name, manager_id) VALUES
 ('Employee B', 1),
 ('Employee C', 1);
 
+
+-- KAPT 1 - INNER JOIN
+SELECT c.name, o.order_id
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id;
+-- KAPT 2 - LEFT JOIN
+SELECT c.name, o.order_id
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id; -- Захиалгагүй үйлчлүүлэгч
+SELECT c.name
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL;
+-- KAPT 3 - RIGHT JOIN
+SELECT c.name, o.order_id
+FROM customers c
+RIGHT JOIN orders o ON c.customer_id = o.customer_id;
+-- KAPT 4
+SELECT c.name, o.order_id
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+
+UNION
+
+SELECT c.name, o.order_id
+FROM customers c
+RIGHT JOIN orders o ON c.customer_id = o.customer_id;
+
+
+-- KAPT 5
+SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m 
+ON e.manager_id = m.employee_id;
+
+-- KAPT 6
+SELECT *
+FROM orders o
+LEFT JOIN customers c 
+ON o.customer_id = c.customer_id
+WHERE c.city = 'Ulaanbaatar';
+-- KAPT 7
+
+SELECT c.name, p.product_name, oi.quantity
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id;  
+
+-- KAPT 8
+select c.name, p.product_name
+from customers c 
+cross join products p;
